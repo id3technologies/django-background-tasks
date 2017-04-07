@@ -180,6 +180,15 @@ Example project
 Hiroaki Nakamura has written an example project demonstrating how django-background-tasks works. You find it here_.
 
 
+Tests
+=====
+
+You can run the test suite on all supported versions of Django and Python:
+
+.. code-block:: bash
+
+    $ tox
+
 
 .. _Django: http://www.djangoproject.com/
 .. _DelayedJob: http://github.com/tobi/delayed_job
