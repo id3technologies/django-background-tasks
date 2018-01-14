@@ -316,3 +316,9 @@ class Task(models.Model):
 
     class Meta:
         db_table = 'background_task'
+        index_together = [
+            ['task_name', 'task_hash'],
+            ['run_at', 'failed_at'],
+            ['run_at', 'failed_at', 'queue'],
+            ['locked_at', 'failed_at', 'run_at']
+        ]
