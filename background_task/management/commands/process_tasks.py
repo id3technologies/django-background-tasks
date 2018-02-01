@@ -9,6 +9,7 @@ from django.core.management.base import BaseCommand
 
 from background_task.tasks import tasks, autodiscover
 from background_task.utils import SignalManager
+from background_task.settings import app_settings
 from compat import close_connection
 
 
@@ -79,13 +80,19 @@ class Command(BaseCommand):
         log_std = options.pop('log_std', False)
         sig_manager = SignalManager()
 
+        print 'Starting queue "{}" processor with sleep {} and duration {}. Thread pool size: {}'.format(
+            queue,
+            sleep,
+            duration if duration else 'no limit',
+            app_settings.BACKGROUND_TASK_ASYNC_THREADS
+        )
+
         if log_std:
             _configure_log_std()
 
         autodiscover()
 
         start_time = time.time()
-
         while (duration <= 0) or (time.time() - start_time) <= duration:
             if sig_manager.kill_now:
                 # shutting down gracefully

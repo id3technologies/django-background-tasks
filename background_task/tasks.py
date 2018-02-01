@@ -65,6 +65,7 @@ class PoolRunner:
     def __init__(self, bg_runner, num_processes):
         self._bg_runner = bg_runner
         self._num_processes = num_processes
+        logger.debug('Using %d processes' % self._num_processes)
 
     _pool_instance = None
 
